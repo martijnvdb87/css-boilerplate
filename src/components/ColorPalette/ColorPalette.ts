@@ -5,7 +5,15 @@ import Color from '@/models/Color';
 import { useTemplate } from '@/composables';
 
 export default class ColorPalette extends HTMLElement {
+  static get observedAttributes() {
+    return ['name', 'color', 'steps'];
+  }
+
   protected connectedCallback(): void {
+    this.render();
+  }
+
+  render(): void {
     const name = this.getAttribute('name') ?? '';
     const color = this.getAttribute('color') ?? 'gray';
     const steps = parseInt(this.getAttribute('steps') ?? '50');

@@ -5,16 +5,28 @@ import { useTemplate } from '@/composables';
 import File from '@/models/File';
 import Color from '@/models/Color';
 
-interface Color {
+interface ColorPalette {
   name: string,
   color: string
 }
 
 export default class FullColorPalette extends HTMLElement {
-  private colors: Color[] = [];
+  private colors: ColorPalette[] = [];
   private steps: number = 50;
 
+  static get observedAttributes() {
+    return ['colors', 'steps'];
+  }
+
   protected connectedCallback(): void {
+    this.render();
+  }
+
+  attributeChangedCallback() {
+    this.render();
+  }
+
+  render(): void {
     const colors = this.getAttribute('colors') ?? '';
     this.steps = parseInt(this.getAttribute('steps') ?? '50');
 
@@ -26,7 +38,7 @@ export default class FullColorPalette extends HTMLElement {
     }).filter((part: string) => {
       return !(part === '' || !part.includes(':'));
 
-    }).map((part: string): Color => {
+    }).map((part: string): ColorPalette => {
       let [name, color] = part.split(':');
 
       name = name.trim();
@@ -35,7 +47,7 @@ export default class FullColorPalette extends HTMLElement {
     });
     
     this.innerHTML = useTemplate(template, {
-      PALETTES: this.colors.map((color: Color) => {
+      PALETTES: this.colors.map((color: ColorPalette) => {
         return `<color-palette name="${color.name}" color="${color.color}" steps="${this.steps}"></color-palette>`
       }).join('')
     });
@@ -68,10 +80,7 @@ export default class FullColorPalette extends HTMLElement {
     }
 
     output.push(`}`);
-
     file.content = output.join('');
-
-
     file.download();
   }
 }

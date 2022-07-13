@@ -4,7 +4,15 @@ import template from './colorswatch.html?raw';
 import { useTemplate } from '@/composables';
 
 export default class ColorSwatch extends HTMLElement {
+  static get observedAttributes() {
+    return ['name', 'color', 'weight'];
+  }
+
   protected connectedCallback(): void {
+    this.render();
+  }
+
+  render(): void {
     const name = this.getAttribute('name') ?? '';
     const color = this.getAttribute('color') ?? 'gray';
     const weight = this.getAttribute('weight') ?? '500';

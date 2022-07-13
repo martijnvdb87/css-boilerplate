@@ -18,5 +18,5 @@ color-palette .color-palette__name {
 color-palette .color-palette__swatches {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 4px;
+  gap: 12px 0px;
 }
