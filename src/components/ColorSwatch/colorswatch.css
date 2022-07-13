@@ -1,0 +1,25 @@
+color-swatch .color-swatch {
+  display: flex;
+  text-align: center;
+}
+
+color-swatch .color-swatch__color {
+  height: 40px;
+  width: 60px;
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+color-swatch .color-swatch__weight {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #444;
+  margin-bottom: 2px;
+}
+
+color-swatch .color-swatch__var,
+color-swatch .color-swatch__hex {
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: #888;
+}

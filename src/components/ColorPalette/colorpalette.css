@@ -1,0 +1,22 @@
+color-palette .color-palette {
+  padding: 32px 0px;
+  border-top: 1px solid #ddd;
+}
+
+color-palette .color-palette__container {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: center;
+  gap: 24px;
+}
+
+color-palette .color-palette__name {
+  height: 60px;
+  width: 80px;
+}
+
+color-palette .color-palette__swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 4px;
+}
