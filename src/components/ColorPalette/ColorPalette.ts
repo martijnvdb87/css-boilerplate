@@ -30,3 +30,5 @@ export default class ColorPalette extends HTMLElement {
     });
   }
 }
+
+customElements.define('color-palette', ColorPalette);

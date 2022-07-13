@@ -7,7 +7,6 @@
     <title>Vite App</title>
   </head>
   <body>
-    <input id="full-color-palette-steps" type="range" step="25" min="25" max="100" value="50">
     <full-color-palette id="full-color-palette" colors="
       gray: #64748b;
       red: #ef4444;
@@ -29,14 +28,5 @@
       rose: #f43f5e;
     " steps="50"></full-color-palette>
     <script type="module" src="/src/main.ts"></script>
-    <script>
-      var fullColorPalette = document.getElementById('full-color-palette');
-
-      document.getElementById('full-color-palette-steps').addEventListener('input', function(e) {
-        var value = e.currentTarget.value;
-
-        fullColorPalette.setAttribute('steps', value);
-      });
-    </script>
   </body>
 </html>

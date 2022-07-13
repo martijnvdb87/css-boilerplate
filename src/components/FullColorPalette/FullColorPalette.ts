@@ -55,13 +55,15 @@ export default class FullColorPalette extends HTMLElement {
     const buttons = this.querySelectorAll('.full-color-palette__export-button');
 
     Array.from(buttons, button => {
-      button.addEventListener('click', () => this.export());
+      button.addEventListener('click', () => this.download());
     });
   }
 
-  private export(): void {
-    const file = new File('colors.css');
+  download(): void {
+    (new File('colors.css', this.export())).download();
+  }
 
+  export(): string {
     const output: string[] = [
       `:root,::before,::after{`
     ];
@@ -76,11 +78,12 @@ export default class FullColorPalette extends HTMLElement {
 
         output.push(`--hsl-${color.name}-${key}:${hue},${saturation}%,${lightness}%;`);
       });
-
     }
 
     output.push(`}`);
-    file.content = output.join('');
-    file.download();
+
+    return output.join('');
   }
 }
+
+customElements.define('full-color-palette', FullColorPalette);

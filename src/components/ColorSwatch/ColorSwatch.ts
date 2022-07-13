@@ -24,3 +24,5 @@ export default class ColorSwatch extends HTMLElement {
     });
   }
 }
+
+customElements.define('color-swatch', ColorSwatch);
