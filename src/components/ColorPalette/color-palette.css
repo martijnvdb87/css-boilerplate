@@ -1,6 +1,5 @@
 color-palette .color-palette {
   padding: 32px 0px;
-  border-top: 1px solid #ddd;
 }
 
 color-palette .color-palette__container {
@@ -16,7 +15,8 @@ color-palette .color-palette__name {
 }
 
 color-palette .color-palette__swatches {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(12, 58px);
   flex-wrap: wrap;
   gap: 12px 0px;
 }

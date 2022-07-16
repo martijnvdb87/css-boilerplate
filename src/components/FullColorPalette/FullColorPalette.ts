@@ -1,8 +1,7 @@
-import './fullcolorpalette.css';
-import template from './fullcolorpalette.html?raw';
+import './full-color-palette.css';
+import template from './full-color-palette.html?raw';
 
 import { useTemplate } from '@/composables';
-import File from '@/models/File';
 import Color from '@/models/Color';
 
 interface ColorPalette {
@@ -51,16 +50,6 @@ export default class FullColorPalette extends HTMLElement {
         return `<color-palette name="${color.name}" color="${color.color}" steps="${this.steps}"></color-palette>`
       }).join('')
     });
-
-    const buttons = this.querySelectorAll('.full-color-palette__export-button');
-
-    Array.from(buttons, button => {
-      button.addEventListener('click', () => this.download());
-    });
-  }
-
-  download(): void {
-    (new File('colors.css', this.export())).download();
   }
 
   export(): string {
@@ -70,13 +59,7 @@ export default class FullColorPalette extends HTMLElement {
 
     for(const color of this.colors) {
       Object.entries(Color.palette(color.color, this.steps)).forEach(([key, value]) => {
-        output.push(`--color-${color.name}-${key}:${value.hex()};`);
-
-        const hue = Math.round(value.get('hsl.h'));
-        const saturation = Math.round(value.get('hsl.s') * 100);
-        const lightness = Math.round(value.get('hsl.l') * 100);
-
-        output.push(`--hsl-${color.name}-${key}:${hue},${saturation}%,${lightness}%;`);
+        output.push(`--${color.name}-${key}:${value.hex()};`);
       });
     }
 

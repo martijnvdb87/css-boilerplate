@@ -1,5 +1,5 @@
-import './colorswatch.css';
-import template from './colorswatch.html?raw';
+import './color-swatch.css';
+import template from './color-swatch.html?raw';
 
 import { useTemplate } from '@/composables';
 

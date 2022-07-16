@@ -1,5 +1,5 @@
-import './colorpalette.css';
-import template from './colorpalette.html?raw';
+import './color-palette.css';
+import template from './color-palette.html?raw';
 import Color from '@/models/Color';
 
 import { useTemplate } from '@/composables';
