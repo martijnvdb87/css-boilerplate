@@ -56,10 +56,49 @@ export default class FullColorPalette extends HTMLElement {
     const output: string[] = [
       `:root,::before,::after{`
     ];
+    
+    output.push(`--white:#ffffff;`);
+
+    const grayColor = this.colors.find(color => color.name === 'gray');
+
+    if(grayColor) {
+      const grayColorPalette = Color.palette(grayColor.color, this.steps);
+      output.push(`--black:${grayColorPalette[900].hex()};`);
+    }
+
+    for(const color of this.colors) {
+      const totalSteps = 900 / this.steps;
+      const middleStep = Math.round(totalSteps / 2);
+      const colorDefaultWeight = middleStep * this.steps;
+      const defaultColor = Color.palette(color.color, this.steps)[colorDefaultWeight];
+
+      output.push(`--${color.name}:${defaultColor};`);
+    }
 
     for(const color of this.colors) {
       Object.entries(Color.palette(color.color, this.steps)).forEach(([key, value]) => {
         output.push(`--${color.name}-${key}:${value.hex()};`);
+      });
+    }
+    
+    output.push(`--white:0,0%,100%;`);
+
+    if(grayColor) {
+      const grayColorPalette = Color.palette(grayColor.color, this.steps);
+      const hslH = Math.round(grayColorPalette[900].get('hsl.h'));
+      const hslS = Math.round(grayColorPalette[900].get('hsl.s') * 100);
+      const hslL = Math.round(grayColorPalette[900].get('hsl.l') * 100);
+
+      output.push(`--hsl-black:${hslH},${hslS}%,${hslL}%;`);
+    }
+
+    for(const color of this.colors) {
+      Object.entries(Color.palette(color.color, this.steps)).forEach(([key, value]) => {
+        const hslH = Math.round(value.get('hsl.h'));
+        const hslS = Math.round(value.get('hsl.s') * 100);
+        const hslL = Math.round(value.get('hsl.l') * 100);
+
+        output.push(`--hsl-${color.name}-${key}:${hslH},${hslS}%,${hslL}%;`);
       });
     }
 
