@@ -81,7 +81,7 @@ export default class FullColorPalette extends HTMLElement {
       });
     }
     
-    output.push(`--white:0,0%,100%;`);
+    output.push(`--hsl-white:0,0%,100%;`);
 
     if(grayColor) {
       const grayColorPalette = Color.palette(grayColor.color, this.steps);
